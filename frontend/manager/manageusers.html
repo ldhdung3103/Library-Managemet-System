@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Manage Users</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="page-panel">
+      <div class="header-row">
+        <h2>👥 Manage Users</h2>
+        <div><a class="secondary-btn" href="dashboard.html">← Back</a></div>
+      </div>
+
+      <div class="page-panel" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%); border: 2px dashed rgba(99, 102, 241, 0.3);">
+        <h3 style="margin-top: 0; color: var(--primary);">➕ Add New User</h3>
+        <form>
+          <div class="input-group">
+            <div>
+              <label>Username *</label>
+              <input placeholder="username" required>
+            </div>
+            <div>
+              <label>Password *</label>
+              <input type="password" placeholder="••••••••" required>
+            </div>
+            <div>
+              <label>Full Name *</label>
+              <input placeholder="Full name" required>
+            </div>
+            <div>
+              <label>Email *</label>
+              <input type="email" placeholder="email@example.com" required>
+            </div>
+            <div>
+              <label>Role *</label>
+              <select required>
+                <option value="">-- Select role --</option>
+                <option value="student">👨‍🎓 Student</option>
+                <option value="librarian">📋 Librarian</option>
+                <option value="manager">👔 Manager</option>
+              </select>
+            </div>
+            <div style="display:flex;gap:10px">
+              <button type="submit" class="btn">✅ Add User</button>
+              <button type="reset" class="secondary-btn">Clear</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div style="margin-top: 32px;">
+        <h3 style="color: var(--primary); margin-bottom: 16px;">👥 System Users</h3>
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>🆔 ID</th>
+                <th>👤 Username</th>
+                <th>📧 Email</th>
+                <th>👔 Role</th>
+                <th>⚡ Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td><strong>admin</strong></td>
+                <td>admin@library.com</td>
+                <td><span style="background: rgba(99, 102, 241, 0.2); color: var(--primary); padding: 4px 8px; border-radius: 6px;">👔 Manager</span></td>
+                <td><button class="btn" style="padding: 6px 12px; font-size: 0.9em;">Edit</button> <button class="secondary-btn" style="padding: 6px 12px; font-size: 0.9em;">Delete</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
+        <table class="table"><thead><tr><th>ID</th><th>Username</th><th>Name</th><th>Role</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>student1</td><td>Student One</td><td>student</td><td>active</td><td><button class="form-button">Lock</button></td></tr>
+        </tbody></table>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
