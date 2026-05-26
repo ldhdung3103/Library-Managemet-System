@@ -1,3 +1,72 @@
+<<<<<<< HEAD
+package controller;
+
+import dao.UserDAO;
+import model.User;
+import utils.FrontendPaths;
+
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
+
+import java.io.IOException;
+
+@WebServlet("/manageusers")
+public class ManagerUserServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response)
+            throws IOException {
+
+        response.sendRedirect(FrontendPaths.managerManageUsers(request));
+    }
+
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws IOException {
+
+        String action = request.getParameter("action");
+
+        UserDAO dao = new UserDAO();
+
+        if("add".equals(action)) {
+
+            User user = new User();
+
+            user.setUsername(request.getParameter("username"));
+            user.setPassword(request.getParameter("password"));
+            user.setFullName(request.getParameter("fullName"));
+            user.setEmail(request.getParameter("email"));
+            user.setRole(request.getParameter("role"));
+
+            dao.addUser(user);
+
+        }
+        else if("lock".equals(action)) {
+
+            int userId =
+                Integer.parseInt(request.getParameter("userId"));
+
+            dao.updateStatus(userId, "suspended");
+        }
+        else if("unlock".equals(action)) {
+
+            int userId =
+                Integer.parseInt(request.getParameter("userId"));
+
+            dao.updateStatus(userId, "active");
+        }
+        else if("delete".equals(action)) {
+
+            int userId =
+                Integer.parseInt(request.getParameter("userId"));
+
+            dao.deleteUser(userId);
+        }
+
+        response.sendRedirect(FrontendPaths.managerManageUsers(request));
+    }
+=======
 package controller;
 
 import dao.UserDAO;
@@ -71,4 +140,5 @@ public class ManagerUserServlet extends HttpServlet {
             request.getContextPath() + "/manageusers"
         );
     }
+>>>>>>> 41085e156962748b988643765508fbf3d6064184
 }

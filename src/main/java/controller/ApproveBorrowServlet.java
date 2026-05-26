@@ -4,6 +4,8 @@ import dao.BorrowDAO;
 import dao.LogDAO;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+import utils.AuthUtil;
+import utils.FrontendPaths;
 
 import java.io.IOException;
 
@@ -22,19 +24,29 @@ public class ApproveBorrowServlet extends HttpServlet {
         boolean success = dao.approveBorrow(borrowId);
 
         if(success){
-
-            new LogDAO().addLog(
-                1,
-                "APPROVE_BORROW",
-                "Approved borrow ID " + borrowId
-            );
-
+<<<<<<< Updated upstream
             response.sendRedirect(
                 request.getContextPath() + "/allborrows"
             );
 
         } else {
-            response.getWriter().println("No available books.");
+            response.getWriter().println(
+                    "Approve failed: No available books."
+=======
+
+            new LogDAO().addLog(
+                AuthUtil.getUserId(request),
+                "APPROVE_BORROW",
+                "Approved borrow ID " + borrowId
+            );
+
+            response.sendRedirect(FrontendPaths.librarianAllBorrows(request));
+
+        } else {
+            response.sendRedirect(
+                    FrontendPaths.librarianAllBorrows(request) + "?error=no_stock"
+>>>>>>> Stashed changes
+            );
         }
     }
 }

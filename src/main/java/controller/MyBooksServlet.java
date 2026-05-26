@@ -1,9 +1,10 @@
 package controller;
 
-import dao.BorrowDAO;
+import filter.AuthFilter;
 import model.User;
+import utils.AuthUtil;
+import utils.FrontendPaths;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
@@ -12,18 +13,17 @@ import java.io.IOException;
 @WebServlet("/mybooks")
 public class MyBooksServlet extends HttpServlet {
 
+    @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
 
-        User user = (User) request.getSession().getAttribute("user");
+        User user = AuthUtil.getUser(request);
+        if (user == null) {
+            AuthFilter.redirectToLogin(request, response);
+            return;
+        }
 
-        BorrowDAO dao = new BorrowDAO();
-
-        request.setAttribute("records",
-                dao.getBorrowedBooks(user.getUserId()));
-
-        request.getRequestDispatcher("student/mybooks.jsp")
-               .forward(request, response);
+        response.sendRedirect(FrontendPaths.studentMyBooks(request));
     }
 }

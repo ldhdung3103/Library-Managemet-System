@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Manager Dashboard</title>
+  <script src="../js/base-path.js"></script>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body data-page="manager-dashboard">
+  <div class="container">
+    <div class="page-panel">
+      <div class="header-row">
+        <h2>👔 Manager Dashboard</h2>
+        <div id="userBar"></div>
+      </div>
+      <p class="muted">System overview and administrative controls.</p>
+
+      <div class="card-grid">
+        <div class="page-panel" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-left: 4px solid var(--primary);">
+          <h3 style="margin-top: 0;">📊 System Stats</h3>
+          <div id="managerStats"><p class="muted">Loading…</p></div>
+        </div>
+        <div class="page-panel" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%); border-left: 4px solid var(--success);">
+          <h3 style="margin-top: 0; color: var(--success);">⚙️ Admin Actions</h3>
+          <a href="manageusers.html">👥 Manage Users</a>
+          <a href="logs.html">📋 View Logs</a>
+          <a href="report.html">📈 Reports</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script src="../js/app.js" defer></script>
+</body>
+</html>

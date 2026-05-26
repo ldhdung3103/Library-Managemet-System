@@ -3,28 +3,23 @@ package controller;
 import dao.BookDAO;
 import dao.LogDAO;
 import model.Book;
+import utils.AuthUtil;
+import utils.FrontendPaths;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/managebooks")
 public class BookManagementServlet extends HttpServlet {
 
+    @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
 
-        BookDAO dao = new BookDAO();
-        List<Book> books = dao.getAllBooks();
-
-        request.setAttribute("books", books);
-
-        request.getRequestDispatcher("librarian/managebooks.jsp")
-               .forward(request, response);
+        response.sendRedirect(FrontendPaths.librarianManageBooks(request));
     }
 
     protected void doPost(HttpServletRequest request,
@@ -53,18 +48,34 @@ public class BookManagementServlet extends HttpServlet {
 
             dao.addBook(book);
 
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+=======
+            logDao.addLog(
+                AuthUtil.getUserId(request),
+=======
             logDao.addLog(
                 1,
+>>>>>>> 41085e156962748b988643765508fbf3d6064184
                 "ADD_BOOK",
                 "Added book: " + book.getTitle()
             );
 
+<<<<<<< HEAD
+>>>>>>> Stashed changes
+=======
+>>>>>>> 41085e156962748b988643765508fbf3d6064184
         } else if ("delete".equals(action)) {
 
             int bookId =
                 Integer.parseInt(request.getParameter("bookId"));
 
             boolean success = dao.deleteBook(bookId);
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+            
+            if(!success){
+=======
 
             if(success){
 
@@ -76,16 +87,29 @@ public class BookManagementServlet extends HttpServlet {
 
             } else {
 
+>>>>>>> 41085e156962748b988643765508fbf3d6064184
                 response.getWriter().println(
                     "<script>alert('Cannot delete: Book is currently borrowed or pending approval.');" +
                     "location='" + request.getContextPath() + "/managebooks';</script>"
+=======
+
+            if(success){
+
+                logDao.addLog(
+                    AuthUtil.getUserId(request),
+                    "DELETE_BOOK",
+                    "Deleted book ID: " + bookId
+                );
+
+            } else {
+                response.sendRedirect(
+                        FrontendPaths.librarianManageBooks(request) + "?error=delete_failed"
+>>>>>>> Stashed changes
                 );
                 return;
             }
         }
 
-        response.sendRedirect(
-            request.getContextPath() + "/managebooks"
-        );
+        response.sendRedirect(FrontendPaths.librarianManageBooks(request));
     }
 }
