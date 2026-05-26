@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Browse Books</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="page-panel">
+      <div class="header-row">
+        <h2>🔍 Available Books</h2>
+        <div><a class="secondary-btn" href="dashboard.html">← Back</a></div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <input type="search" placeholder="Search books by title, author..." style="width: 100%; padding: 12px 16px; border-radius: 10px; border: 2px solid var(--border); font-size: 1em;">
+      </div>
+
+      <div class="table-wrapper">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>📖 Title</th>
+              <th>✍️ Author</th>
+              <th>📂 Category</th>
+              <th>📊 Available</th>
+              <th>⚡ Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Example Book A</strong></td>
+              <td>Author A</td>
+              <td><span style="background: rgba(99, 102, 241, 0.2); padding: 4px 8px; border-radius: 6px; color: var(--primary);">Fiction</span></td>
+              <td><span style="background: rgba(16, 185, 129, 0.2); color: var(--success); padding: 4px 8px; border-radius: 6px;">3</span></td>
+              <td><button class="btn" style="padding: 6px 12px; font-size: 0.9em;">📥 Borrow</button></td>
+            </tr>
+            <tr>
+              <td><strong>Example Book B</strong></td>
+              <td>Author B</td>
+              <td><span style="background: rgba(245, 158, 11, 0.2); padding: 4px 8px; border-radius: 6px; color: var(--warning);">Science</span></td>
+              <td><span style="background: rgba(239, 68, 68, 0.2); color: var(--danger); padding: 4px 8px; border-radius: 6px;">1</span></td>
+              <td><button class="btn" style="padding: 6px 12px; font-size: 0.9em;">📥 Borrow</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

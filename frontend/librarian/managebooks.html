@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Manage Books</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="page-panel">
+      <div class="header-row">
+        <h2>📖 Manage Books</h2>
+        <div><a class="secondary-btn" href="dashboard.html">← Back</a></div>
+      </div>
+
+      <div class="page-panel" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%); border: 2px dashed rgba(99, 102, 241, 0.3);">
+        <h3 style="margin-top: 0; color: var(--primary);">Add New Book</h3>
+        <form>
+          <div class="input-group">
+            <div>
+              <label>Title *</label>
+              <input name="title" placeholder="Enter book title" required>
+            </div>
+            <div>
+              <label>Author *</label>
+              <input name="author" placeholder="Enter author name" required>
+            </div>
+            <div>
+              <label>Category *</label>
+              <input name="category" placeholder="e.g., Science, Fiction" required>
+            </div>
+            <div>
+              <label>Quantity *</label>
+              <input name="quantity" type="number" placeholder="0" required>
+            </div>
+            <div style="display:flex;gap:10px">
+              <button type="submit" class="btn">+ Add Book</button>
+              <button type="reset" class="secondary-btn">Clear</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div style="margin-top: 32px;">
+        <h3 style="color: var(--primary); margin-bottom: 16px;">📚 Book Inventory</h3>
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Available</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Example Book A</td>
+                <td>Author A</td>
+                <td>Fiction</td>
+                <td><span style="background: rgba(16, 185, 129, 0.2); color: var(--success); padding: 4px 8px; border-radius: 6px;">3</span></td>
+                <td><button class="btn" style="padding: 6px 12px; font-size: 0.9em;">Edit</button> <button class="secondary-btn" style="padding: 6px 12px; font-size: 0.9em;">Delete</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
