@@ -19,7 +19,13 @@
                 Manage Books
             </a>
         </li>
-
+        
+        <li>
+            <a href="${pageContext.request.contextPath}/penalties">
+                Manage Penalties
+            </a>
+        </li>
+        
         <li>
             <a href="${pageContext.request.contextPath}/logout">
                 Logout

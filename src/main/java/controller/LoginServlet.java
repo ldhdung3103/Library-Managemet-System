@@ -35,11 +35,11 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user);
 
             if(user.getRole().equals("student")){
-                response.sendRedirect("student/dashboard.jsp");
+                response.sendRedirect(request.getContextPath() + "/student/dashboard.jsp");
             } else if(user.getRole().equals("librarian")){
-                response.sendRedirect("librarian/dashboard.jsp");
+                response.sendRedirect(request.getContextPath() + "/librarian/dashboard.jsp");
             } else {
-                response.sendRedirect("manager/dashboard.jsp");
+                response.sendRedirect(request.getContextPath() + "/managerdashboard");
             }
 
         } else {

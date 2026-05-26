@@ -1,12 +1,14 @@
 package model;
 
 public class User {
+
     private int userId;
     private String username;
     private String password;
     private String fullName;
     private String email;
     private String role;
+    private String status;
 
     public User() {}
 
@@ -56,5 +58,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

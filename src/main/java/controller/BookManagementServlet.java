@@ -1,6 +1,7 @@
 package controller;
 
 import dao.BookDAO;
+import dao.LogDAO;
 import model.Book;
 
 import jakarta.servlet.ServletException;
@@ -33,15 +34,17 @@ public class BookManagementServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         BookDAO dao = new BookDAO();
+        LogDAO logDao = new LogDAO();
 
         if ("add".equals(action)) {
 
             Book book = new Book();
+
             book.setTitle(request.getParameter("title"));
             book.setAuthor(request.getParameter("author"));
             book.setCategory(request.getParameter("category"));
             book.setIsbn(request.getParameter("isbn"));
-            
+
             int quantity =
                 Integer.parseInt(request.getParameter("quantity"));
 
@@ -50,14 +53,29 @@ public class BookManagementServlet extends HttpServlet {
 
             dao.addBook(book);
 
+            logDao.addLog(
+                1,
+                "ADD_BOOK",
+                "Added book: " + book.getTitle()
+            );
+
         } else if ("delete".equals(action)) {
 
             int bookId =
                 Integer.parseInt(request.getParameter("bookId"));
-            
+
             boolean success = dao.deleteBook(bookId);
-            
-            if(!success){
+
+            if(success){
+
+                logDao.addLog(
+                    1,
+                    "DELETE_BOOK",
+                    "Deleted book ID: " + bookId
+                );
+
+            } else {
+
                 response.getWriter().println(
                     "<script>alert('Cannot delete: Book is currently borrowed or pending approval.');" +
                     "location='" + request.getContextPath() + "/managebooks';</script>"
