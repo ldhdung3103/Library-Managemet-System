@@ -15,7 +15,7 @@ public class DBConnection {
             "jdbc:mysql://127.0.0.1:3306/library_management";
 
     private static final String USER = "root";
-    private static final String PASSWORD = "123456";
+    private static final String PASSWORD = "your_password_here";
 
     public static Connection getConnection() {
         Connection conn = null;
