@@ -12,6 +12,7 @@ import java.io.IOException;
 @WebServlet("/approve")
 public class ApproveBorrowServlet extends HttpServlet {
 
+    @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws IOException {
@@ -24,15 +25,6 @@ public class ApproveBorrowServlet extends HttpServlet {
         boolean success = dao.approveBorrow(borrowId);
 
         if(success){
-<<<<<<< Updated upstream
-            response.sendRedirect(
-                request.getContextPath() + "/allborrows"
-            );
-
-        } else {
-            response.getWriter().println(
-                    "Approve failed: No available books."
-=======
 
             new LogDAO().addLog(
                 AuthUtil.getUserId(request),
@@ -40,12 +32,15 @@ public class ApproveBorrowServlet extends HttpServlet {
                 "Approved borrow ID " + borrowId
             );
 
-            response.sendRedirect(FrontendPaths.librarianAllBorrows(request));
+            response.sendRedirect(
+                FrontendPaths.librarianAllBorrows(request)
+            );
 
         } else {
+
             response.sendRedirect(
-                    FrontendPaths.librarianAllBorrows(request) + "?error=no_stock"
->>>>>>> Stashed changes
+                FrontendPaths.librarianAllBorrows(request)
+                + "?error=no_stock"
             );
         }
     }

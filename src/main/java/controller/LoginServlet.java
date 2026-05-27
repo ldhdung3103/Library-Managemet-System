@@ -24,34 +24,38 @@ public class LoginServlet extends HttpServlet {
         User user = dao.login(username, password);
 
         if (user != null) {
+
             HttpSession session = request.getSession(true);
             session.setAttribute("user", user);
 
-<<<<<<< Updated upstream
-            if(user.getRole().equals("student")){
-                response.sendRedirect(request.getContextPath() + "/student/dashboard.jsp");
-            } else if(user.getRole().equals("librarian")){
-                response.sendRedirect(request.getContextPath() + "/librarian/dashboard.jsp");
-            } else {
-<<<<<<< HEAD
-                response.sendRedirect("manager/dashboard.jsp");
-=======
             switch (user.getRole()) {
+
                 case "student" ->
-                        response.sendRedirect(FrontendPaths.studentDashboard(request));
+                    response.sendRedirect(
+                        FrontendPaths.studentDashboard(request)
+                    );
+
                 case "librarian" ->
-                        response.sendRedirect(FrontendPaths.librarianDashboard(request));
+                    response.sendRedirect(
+                        FrontendPaths.librarianDashboard(request)
+                    );
+
                 case "manager" ->
-                        response.sendRedirect(FrontendPaths.managerDashboard(request));
+                    response.sendRedirect(
+                        FrontendPaths.managerDashboard(request)
+                    );
+
                 default ->
-                        response.sendRedirect(FrontendPaths.login(request) + "?error=role");
->>>>>>> Stashed changes
-=======
-                response.sendRedirect(request.getContextPath() + "/managerdashboard");
->>>>>>> 41085e156962748b988643765508fbf3d6064184
+                    response.sendRedirect(
+                        FrontendPaths.login(request) + "?error=role"
+                    );
             }
+
         } else {
-            response.sendRedirect(FrontendPaths.login(request) + "?error=1");
+
+            response.sendRedirect(
+                FrontendPaths.login(request) + "?error=1"
+            );
         }
     }
 }

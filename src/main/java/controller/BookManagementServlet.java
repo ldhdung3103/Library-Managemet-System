@@ -19,9 +19,12 @@ public class BookManagementServlet extends HttpServlet {
                          HttpServletResponse response)
             throws IOException {
 
-        response.sendRedirect(FrontendPaths.librarianManageBooks(request));
+        response.sendRedirect(
+            FrontendPaths.librarianManageBooks(request)
+        );
     }
 
+    @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws IOException {
@@ -48,50 +51,18 @@ public class BookManagementServlet extends HttpServlet {
 
             dao.addBook(book);
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
             logDao.addLog(
                 AuthUtil.getUserId(request),
-=======
-            logDao.addLog(
-                1,
->>>>>>> 41085e156962748b988643765508fbf3d6064184
                 "ADD_BOOK",
                 "Added book: " + book.getTitle()
             );
 
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> 41085e156962748b988643765508fbf3d6064184
         } else if ("delete".equals(action)) {
 
             int bookId =
                 Integer.parseInt(request.getParameter("bookId"));
 
             boolean success = dao.deleteBook(bookId);
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-            
-            if(!success){
-=======
-
-            if(success){
-
-                logDao.addLog(
-                    1,
-                    "DELETE_BOOK",
-                    "Deleted book ID: " + bookId
-                );
-
-            } else {
-
->>>>>>> 41085e156962748b988643765508fbf3d6064184
-                response.getWriter().println(
-                    "<script>alert('Cannot delete: Book is currently borrowed or pending approval.');" +
-                    "location='" + request.getContextPath() + "/managebooks';</script>"
-=======
 
             if(success){
 
@@ -102,14 +73,17 @@ public class BookManagementServlet extends HttpServlet {
                 );
 
             } else {
+
                 response.sendRedirect(
-                        FrontendPaths.librarianManageBooks(request) + "?error=delete_failed"
->>>>>>> Stashed changes
+                    FrontendPaths.librarianManageBooks(request)
+                    + "?error=delete_failed"
                 );
                 return;
             }
         }
 
-        response.sendRedirect(FrontendPaths.librarianManageBooks(request));
+        response.sendRedirect(
+            FrontendPaths.librarianManageBooks(request)
+        );
     }
 }

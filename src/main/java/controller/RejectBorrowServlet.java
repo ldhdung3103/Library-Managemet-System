@@ -12,6 +12,7 @@ import java.io.IOException;
 @WebServlet("/reject")
 public class RejectBorrowServlet extends HttpServlet {
 
+    @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws IOException {
@@ -22,27 +23,14 @@ public class RejectBorrowServlet extends HttpServlet {
         BorrowDAO dao = new BorrowDAO();
         dao.rejectBorrow(borrowId);
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-        new LogDAO().addLog(
-            1,
-            "REJECT_BORROW",
-            "Rejected borrow ID " + borrowId
-        );
-
->>>>>>> 41085e156962748b988643765508fbf3d6064184
-        response.sendRedirect(
-            request.getContextPath() + "/allborrows"
-        );
-=======
         new LogDAO().addLog(
             AuthUtil.getUserId(request),
             "REJECT_BORROW",
             "Rejected borrow ID " + borrowId
         );
 
-        response.sendRedirect(FrontendPaths.librarianAllBorrows(request));
->>>>>>> Stashed changes
+        response.sendRedirect(
+            FrontendPaths.librarianAllBorrows(request)
+        );
     }
 }
