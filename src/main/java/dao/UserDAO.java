@@ -2,6 +2,7 @@ package dao;
 
 import model.User;
 import utils.DBConnection;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,8 @@ public class UserDAO {
         try(Connection conn = DBConnection.getConnection()) {
 
             String sql =
-                "SELECT * FROM users WHERE username=? AND password=?";
+                "SELECT * FROM users " +
+                "WHERE username=? AND password=? AND status='active'";
 
             PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -25,38 +27,16 @@ public class UserDAO {
 
             ResultSet rs = ps.executeQuery();
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-            if(rs.next()){
-=======
-            if(rs.next()) {
-                String status = rs.getString("status");
-                if (status != null && !"active".equalsIgnoreCase(status)) {
-                    return null;
-                }
-
->>>>>>> Stashed changes
-=======
             if(rs.next()) {
 
->>>>>>> 41085e156962748b988643765508fbf3d6064184
                 user = new User();
 
                 user.setUserId(rs.getInt("user_id"));
                 user.setUsername(rs.getString("username"));
                 user.setRole(rs.getString("role"));
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-                user.setStatus(status);
-                user.setFullName(rs.getString("full_name"));
-                user.setEmail(rs.getString("email"));
->>>>>>> Stashed changes
-=======
                 user.setStatus(rs.getString("status"));
                 user.setFullName(rs.getString("full_name"));
                 user.setEmail(rs.getString("email"));
->>>>>>> 41085e156962748b988643765508fbf3d6064184
             }
 
         } catch(Exception e){
