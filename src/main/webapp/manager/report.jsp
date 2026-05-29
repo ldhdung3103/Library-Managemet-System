@@ -1,50 +1,78 @@
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import="model.Stats" %>
 
 <%
-Stats stats = (Stats) request.getAttribute("stats");
+    Stats stats = (Stats) request.getAttribute("stats");
 %>
 
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <title>Manager Report</title>
-    </head>
-    <body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Reports</title>
 
-    <h2>Library Report</h2>
+  <script src="../js/base-path.js"></script>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
 
-    <table border="1" cellpadding="10">
-        <tr>
-            <td>Total Users</td>
-            <td><%= stats.getTotalUsers() %></td>
-        </tr>
-        <tr>
-            <td>Total Books</td>
-            <td><%= stats.getTotalBooks() %></td>
-        </tr>
-        <tr>
-            <td>Borrowed Books</td>
-            <td><%= stats.getBorrowedBooks() %></td>
-        </tr>
-        <tr>
-            <td>Pending Requests</td>
-            <td><%= stats.getPendingRequests() %></td>
-        </tr>
-        <tr>
-            <td>Overdue Books</td>
-            <td><%= stats.getOverdueBooks() %></td>
-        </tr>
-        <tr>
-            <td>Total Penalties</td>
-            <td>$<%= stats.getTotalPenalty() %></td>
-        </tr>
-    </table>
+<body data-page="manager-report">
 
-    <br>
+  <div class="container">
 
-    <a href="${pageContext.request.contextPath}/manager/dashboard.jsp">
-        Back
-    </a>
+    <div class="page-panel">
 
-    </body>
+      <div class="header-row">
+        <h2>📈 Library Report</h2>
+        <div id="userBar"></div>
+      </div>
+
+      <div class="card-grid" id="reportGrid" style="margin-top:24px;">
+
+        <div class="card">
+          <h3>Total Users</h3>
+          <p><%= stats.getTotalUsers() %></p>
+        </div>
+
+        <div class="card">
+          <h3>Total Books</h3>
+          <p><%= stats.getTotalBooks() %></p>
+        </div>
+
+        <div class="card">
+          <h3>Borrowed Books</h3>
+          <p><%= stats.getBorrowedBooks() %></p>
+        </div>
+
+        <div class="card">
+          <h3>Pending Requests</h3>
+          <p><%= stats.getPendingRequests() %></p>
+        </div>
+
+        <div class="card">
+          <h3>Overdue Books</h3>
+          <p><%= stats.getOverdueBooks() %></p>
+        </div>
+
+        <div class="card">
+          <h3>Total Penalties</h3>
+          <p>$<%= stats.getTotalPenalty() %></p>
+        </div>
+
+      </div>
+
+      <p style="margin-top:16px;">
+        <a class="secondary-btn"
+           href="${pageContext.request.contextPath}/manager/dashboard.jsp">
+          ← Back
+        </a>
+      </p>
+
+    </div>
+
+  </div>
+
+<script src="../js/app.js" defer></script>
+
+</body>
 </html>

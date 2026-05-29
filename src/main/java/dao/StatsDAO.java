@@ -11,42 +11,75 @@ public class StatsDAO {
 
         Stats s = new Stats();
 
-        try(Connection conn = DBConnection.getConnection()) {
+        try (Connection conn = DBConnection.getConnection()) {
 
-            s.setTotalUsers(getCount(conn, "SELECT COUNT(*) FROM users"));
-            s.setTotalBooks(getCount(conn, "SELECT COUNT(*) FROM books"));
+            // TotalUser
+            s.setTotalUsers(
+                    getCount(conn,
+                            "SELECT COUNT(*) FROM users"));
 
-            s.setBorrowedBooks(getCount(conn,
-                "SELECT COUNT(*) FROM borrow_records WHERE status='borrowed'"));
+            // TotalBooks
+            s.setTotalBooks(
+                    getCount(conn,
+                            "SELECT COUNT(*) FROM books"));
 
-            s.setPendingRequests(getCount(conn,
-                "SELECT COUNT(*) FROM borrow_records WHERE status='pending'"));
+            // BorrowedBooks
+            s.setBorrowedBooks(
+                    getCount(conn,
+                            "SELECT COUNT(*) FROM borrow_records " +
+                            "WHERE status='borrowed'"));
 
-            s.setOverdueBooks(getCount(conn,
-                "SELECT COUNT(*) FROM borrow_records " +
-                "WHERE due_date < CURDATE() AND status='borrowed'"));
+            // PendingRequests
+            s.setPendingRequests(
+                    getCount(conn,
+                            "SELECT COUNT(*) FROM borrow_records " +
+                            "WHERE status='pending'"));
 
-            s.setTotalPenalty(getSum(conn,
-                "SELECT IFNULL(SUM(amount),0) FROM penalties"));
+            // OverdueBooks
+            s.setOverdueBooks(
+                    getCount(conn,
+                            "SELECT COUNT(*) FROM borrow_records " +
+                            "WHERE due_date < CURDATE() " +
+                            "AND status='borrowed'"));
 
-        } catch(Exception e){
+            // TotalPenalty
+            s.setTotalPenalty(
+                    getSum(conn,
+                            "SELECT IFNULL(SUM(amount),0) " +
+                            "FROM penalties"));
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return s;
     }
 
-    private int getCount(Connection conn, String sql) throws Exception {
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-        rs.next();
-        return rs.getInt(1);
+    private int getCount(Connection conn, String sql)
+            throws SQLException {
+
+        try (
+                PreparedStatement ps =
+                        conn.prepareStatement(sql);
+
+                ResultSet rs =
+                        ps.executeQuery()
+        ) {
+            return rs.next() ? rs.getInt(1) : 0;
+        }
     }
 
-    private double getSum(Connection conn, String sql) throws Exception {
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-        rs.next();
-        return rs.getDouble(1);
+    private double getSum(Connection conn, String sql)
+            throws SQLException {
+
+        try (
+                PreparedStatement ps =
+                        conn.prepareStatement(sql);
+
+                ResultSet rs =
+                        ps.executeQuery()
+        ) {
+            return rs.next() ? rs.getDouble(1) : 0;
+        }
     }
 }
