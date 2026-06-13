@@ -1,5 +1,3 @@
-# Library-WebApp
-
 # Library Management System
 
 ## Introduction
